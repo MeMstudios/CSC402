@@ -2,12 +2,8 @@
 // Created by Michael on 11/11/2016.
 //
 
-#include <iostream>
+
 #include "Patient.h"
-#include <sstream>
-#include <time.h>
-#include <chrono>
-#include <thread>
 
 using namespace std;
 
@@ -98,10 +94,3 @@ string Patient::print() const {
     ss << endl;
     return ss.str();
 }
-/*
-ostream & Patient::operator<<( ostream & out, const Patient & rhs)   {
-
-    return out;
-
-}
-*/

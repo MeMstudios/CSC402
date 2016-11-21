@@ -1,11 +1,28 @@
+/***
+ * Michael E. Murphy
+ * CSC402 - Project 3
+ * November, 2016
+ * Prof: Michael Clark
+ *
+ * This is a simulated hospital triage system.
+ * You login as a doctor, nurse, hospital, or admin.
+ * As an admin you can load patients from a file called "patients.txt"
+ *  You must put this file in the debug folder with the application.
+ * As an admin you can change the name of the log file.
+ *  When you exit, the system will write a report to the log file specified, or "log.txt" by default.
+ * As a doctor you can treat the highest priority patient.
+ *  You can search for patients by last name and print out a report on them.
+ *  You can see a report of all treated patients and view the next patient to be treated.
+ * As a nurse you can add a new patient.
+ * As a hospital you can treat all the patients in triage.
+ *  You can see all the patients needing treatment.
+ *  You can list all the patients by doctor.
+ *
+ * Typing 'exit' will log you out, allowing you to login as something else.
+ *  exit again to write the log file and quit the program.
+ *
+ */
 
-#include <iostream>
-#include <fstream>
-
-#include <map>
-#include <vector>
-#include <sstream>
-#include <queue>
 #include "Patient.h"
 #include "Logger.h"
 
@@ -109,7 +126,8 @@ int main() {
     const int SIZE = 128;
     //a buffer for command inputs
     char buffer[SIZE];
-    string input;
+    //strings for the input and my log file's name
+    string input, filename="log.txt";
     //strings and ints to hold input from a nurse to create new patients.
     string firstname, middlename, lastname, suffix, doctor, ails;
     int treated, priority;
@@ -118,8 +136,8 @@ int main() {
     //multimaps that holds patients and sort them by order of priority
     Multi triagePatients;
     Multi treatedPatients;
-    //open a log file
-    ofstream logfile = ofstream("log.txt", fstream::out);
+    //declare a log file
+    ofstream logfile;
     //stringstream holds my data to be logged
     stringstream ss;
     //get the logger instance
@@ -353,9 +371,9 @@ int main() {
                 cout << "enter a new file name for the log file: " << endl;
                 cin >> buffer;
                 ss << "Changing log file to: " << buffer << endl;
-                input = buffer;
+                filename = buffer;
                 //create a new logfile with the specified name.
-                logfile = ofstream(input, ofstream::out);
+
             }
         }
         //get the next login or exit
@@ -364,6 +382,7 @@ int main() {
         input = buffer;
     }
     //send the string log to the file
+    logfile = ofstream(filename, fstream::out);
     log->log(ss.str(), logfile);
 
 

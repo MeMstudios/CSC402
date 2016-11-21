@@ -7,7 +7,14 @@
 
 #include <cstdlib>
 #include <string>
+#include <time.h>
+#include <chrono>
+#include <thread>
+#include <iostream>
+#include <fstream>
+#include <map>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 class Patient {

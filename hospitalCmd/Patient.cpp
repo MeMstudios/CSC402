@@ -5,7 +5,9 @@
 #include <iostream>
 #include "Patient.h"
 #include <sstream>
-#include "Logger.h"
+#include <time.h>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -39,9 +41,18 @@ const Patient & Patient::operator=(const Patient & rhs){
     }
     return *this;
 }
+/**
+ * Simulates treating a patient, putting the thread to sleep for 1-3 seconds.
+ *
+ */
 void Patient::treat() {
-    if (treated == 0) treated = 1;
+    srand(time(NULL));
+    if (treated == 0) {
+        treated = 1;
+        this_thread::sleep_for(chrono::milliseconds(rand() % 2000 + 1000));
+        cout << "Patient treated." << endl;
 
+    }
 }
 /**
  * Combines the patients first, middle, and last name to return the full name

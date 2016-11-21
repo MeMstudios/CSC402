@@ -1,14 +1,14 @@
 
 #include <iostream>
 #include <fstream>
-#include <thread>
+
 #include <map>
 #include <vector>
 #include <sstream>
 #include <queue>
 #include "Patient.h"
 #include "Logger.h"
-#include <chrono>
+
 
 
 using namespace std;
@@ -177,13 +177,13 @@ int main() {
                     //search through the two maps for the patients with the last name and send it to the console and the log.
                     for (Multi::const_iterator it = triagePatients.begin(); it != triagePatients.end(); ++it) {
                         if (it->second.getLastName() == input) {
-                            cout << it->second.getName() << endl;
+                            cout << it->second.print();
                             ss << "Found: " << it->second.getName() << endl;
                         }
                     }
                     for (Multi::const_iterator it = treatedPatients.begin(); it != treatedPatients.end(); ++it) {
                         if (it->second.getLastName() == input) {
-                            cout << it->second.getName() << endl;
+                            cout << it->second.print();
                             ss << "Found: " << it->second.getName() << endl;
                         }
                     }
@@ -286,7 +286,7 @@ int main() {
                     //treat all the patients in triage in order and put them in the treated container
                     while (triagePatients.size() > 0) {
                         triagePatients.begin()->second.treat();
-                        //this_thread::sleep_for(chrono::milliseconds(3000));
+
                         treatedPatients.insert(*triagePatients.begin());
                         triagePatients.erase(triagePatients.begin());
                     }
